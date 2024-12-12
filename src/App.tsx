@@ -11,7 +11,7 @@ function App() {
       </header>
 
       <div className="profile-pic-container">
-        <img src="/anon_prof_pic.jpg" alt="Profile" className="profile-pic" />
+        <img src="./anon_prof_pic.jpg" alt="Profile" className="profile-pic" />
       </div>
 
       <section className="about">
@@ -39,6 +39,15 @@ function App() {
         <p>
           If it doesn't work, fix it. If it's broken, make it better. If it's perfect, start over.
         </p>
+      </section>
+
+      <section className="books">
+        <h2>Book Recommendations</h2>
+        <ul>
+          <li>In Praise of Shadows by Jun'ichirō Tanizaki — On finding beauty in the subtle and understated</li>
+          <li>Anti-Fragile by Nassim Nicholas Taleb — Why some things benefit from disorder</li>
+          <li>The Courage to be Disliked by Ichiro Kishimi & Fumitake Koga — Exploring freedom through Adlerian psychology</li>
+        </ul>
       </section>
 
       <section className="collaboration">
