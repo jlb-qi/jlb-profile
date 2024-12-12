@@ -11,7 +11,7 @@ function App() {
       </header>
 
       <div className="profile-pic-container">
-        <img src="./anon_prof_pic.jpg" alt="Profile" className="profile-pic" />
+        <img src="/anon_prof_pic.jpg" alt="Profile" className="profile-pic" />
       </div>
 
       <section className="about">
