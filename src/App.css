@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Anonymous Pro", "PT Mono", "Courier New", monospace;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: white;
+}
+
+.header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-weight: normal;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.profile-pic-container {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+.profile-pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: white;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.projects ul {
+  list-style: none;
+  padding: 0;
+}
+
+.projects li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.projects li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  opacity: 0.7;
+}
+
+.contact-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.contact-links a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.contact-links a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 1rem;
+  }
+  
+  .tagline {
+    font-size: 1.25rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+  }
+}

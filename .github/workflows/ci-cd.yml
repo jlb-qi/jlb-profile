@@ -1,0 +1,58 @@
+name: CI/CD
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    - name: Configure AWS CLI
+      run: |
+        mkdir -p ~/.aws
+        echo "[default]" > ~/.aws/config
+        echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/config
+        echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/config
+        echo "region = ${{ secrets.AWS_REGION }}" >> ~/.aws/config
+        echo "output = json" >> ~/.aws/config
+    - name: Deploy to AWS S3
+      run: |
+        # Sync all files except HTML and JSON with a longer cache duration
+        aws s3 sync . s3://${{ secrets.AWS_BUCKET_NAME }} \
+          --delete \
+          --region ${{ secrets.AWS_REGION }} \
+          --acl public-read \
+          --cache-control "max-age=86400" \
+          --exclude "*.html" \
+          --exclude "*.json"
+
+        # Sync HTML and JSON files with no-cache to ensure immediate updates
+        aws s3 sync . s3://${{ secrets.AWS_BUCKET_NAME }} \
+          --delete \
+          --region ${{ secrets.AWS_REGION }} \
+          --acl public-read \
+          --cache-control "no-cache, no-store, must-revalidate" \
+          --include "*.html" \
+          --include "*.json"
+
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
