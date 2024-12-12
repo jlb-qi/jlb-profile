@@ -6,7 +6,7 @@ function App() {
       <header className="header">
         <div className="logo">JLb</div>
         <h1 className="tagline">
-          I build things. Sometimes they're digital, sometimes they're just ideas. Always trying to make them better.
+          I build things. I'm inspired by beautiful and radical things. I'm excited by the unknowy.
         </h1>
       </header>
 
@@ -21,7 +21,7 @@ function App() {
           I'm into rugby, jazz, and art—stuff that feels alive.
         </p>
         <p className="what-i-do">
-          Right now, I'm working on digital tools, exploring web3, and helping people turn ideas into reality.
+          Right now, I'm working on ways to some personal web3 projects, and helping people turn ideas into reality.
         </p>
       </section>
 
@@ -29,6 +29,7 @@ function App() {
         <h2>Stuff I've Built</h2>
         <ul>
           <li>Built a platform for niche communities using blockchain.</li>
+          <li>Launched a digital art collection.</li>
           <li>Designed systems for outdoor activities and transport systems.</li>
           <li>Prototyped experimental solutions for everyday problems.</li>
         </ul>
@@ -37,7 +38,7 @@ function App() {
       <section className="philosophy">
         <h2>Philosophy</h2>
         <p>
-          If it doesn't work, fix it. If it's broken, make it better. If it's perfect, start over.
+        If it’s not working, change it. If you believe in it, see it through.
         </p>
       </section>
 
