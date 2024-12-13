@@ -6,7 +6,7 @@ function App() {
       <header className="header">
         <div className="logo">JLb</div>
         <h1 className="tagline">
-          I build things. I'm inspired by beautiful and radical things. I'm excited by the unknowy.
+          I build things. I'm inspired by beautiful and radical things. I'm excited by the unknown.
         </h1>
       </header>
 
