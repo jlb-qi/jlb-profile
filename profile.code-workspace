@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../jlb-portfolio"
+		},
+		{
+			"path": "../jlb-portfolio-astro"
 		}
 	],
 	"settings": {}

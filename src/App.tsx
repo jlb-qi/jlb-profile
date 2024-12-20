@@ -10,21 +10,23 @@ function App() {
     <Router>
       <div className="app">
         <header className="header">
-          <div className="logo">JLb</div>
-          {isDevMode &&<nav className="main-nav">
-            <Link to="/" className="nav-link">Home</Link>
-             <Link to="/shop" className="nav-link">Shop</Link>
-          </nav>
-          }
-          <h1 className="tagline">
-            I build things. I'm inspired by beautiful and radical things. I'm excited by the unknown.
-          </h1>
+          <div className="content-container">
+            <div className="logo">JLb</div>
+            {isDevMode &&<nav className="main-nav">
+              <Link to="/" className="nav-link">Home</Link>
+               <Link to="/shop" className="nav-link">Shop</Link>
+            </nav>
+            }
+            <h1 className="tagline">
+              I build things. I'm inspired by beautiful and radical things. I'm excited by the unknown.
+            </h1>
+          </div>
         </header>
 
         <Routes>
           {isDevMode && <Route path="/shop" element={<Shop />} />}
           <Route path="/" element={
-            <>
+            <div className="content-container">
               <div className="profile-pic-container">
                 <img src="/anon_prof_pic.jpg" alt="Profile" className="profile-pic" />
               </div>
@@ -70,7 +72,7 @@ function App() {
                 <h2>Collaboration</h2>
                 <p>Got a wild idea? I'm into it. Let's build.</p>
               </section>
-            </>
+            </div>
           } />
         </Routes>
 

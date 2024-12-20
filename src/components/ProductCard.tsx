@@ -1,33 +1,9 @@
 import { useState } from 'react';
+import type { ShopifyProduct } from '../types/shopify';
 
 interface ProductCardProps {
-  product: {
-    id: string;
-    title: string;
-    description: string;
-    priceRange: {
-      minVariantPrice: {
-        amount: string;
-        currencyCode: string;
-      };
-    };
-    images: {
-      edges: Array<{
-        node: {
-          url: string;
-          altText?: string;
-        };
-      }>;
-    };
-    variants: {
-      edges: Array<{
-        node: {
-          id: string;
-        };
-      }>;
-    };
-  };
-  onAddToCart: () => void;
+  product: ShopifyProduct;
+  onAddToCart: () => Promise<void>;
   cartId: string;
   imageSize?: number;
 }
@@ -52,9 +28,9 @@ export const ProductCard = ({ product, onAddToCart, imageSize = 160 }: ProductCa
   const currency = product.priceRange.minVariantPrice.currencyCode;
 
   return (
-    <div className="flex border border-[#eaeaea] bg-white">
+    <div className="flex flex-col border border-[#eaeaea] bg-white h-full rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {/* Image Section */}
-      <div className="border-r border-[#eaeaea]">
+      <div className="border-b border-[#eaeaea] aspect-square">
         {imageUrl && (
           <img
             src={imageUrl}
@@ -65,32 +41,32 @@ export const ProductCard = ({ product, onAddToCart, imageSize = 160 }: ProductCa
       </div>
 
       {/* Details Section */}
-      <div className="flex-1">
+      <div className="flex flex-col flex-1">
         <div className="divide-y divide-[#eaeaea]">
-          <div className="flex justify-between items-center px-6 py-4">
-            <span className="text-sm font-mono text-[#666666]">Product</span>
-            <span className="text-sm font-light">{product.title}</span>
+          <div className="flex justify-between px-4 py-2">
+            <span className="text-sm font-mono text-[#666666] w-[50%] shrink-0">Product</span>
+            <span className="text-sm font-mono text-[#666666] w-[50%] break-words text-right">{product.title}</span>
           </div>
 
-          <div className="flex justify-between items-center px-6 py-4">
+          <div className="flex justify-between items-center px-4 py-2">
             <span className="text-sm font-mono text-[#666666]">Price</span>
-            <span className="text-sm font-light">
+            <span className="text-sm font-mono text-[#666666] text-right">
               {price} {currency}
             </span>
           </div>
 
-          <div className="flex justify-between items-center px-6 py-4">
+          <div className="flex justify-between items-center px-4 py-2">
             <span className="text-sm font-mono text-[#666666]">ID</span>
-            <span className="text-sm font-mono text-[#666666]">({product.id.split('/').pop()?.slice(-2)})</span>
+            <span className="text-sm font-mono text-[#666666] text-right">({product.id.split('/').pop()?.slice(-2)})</span>
           </div>
 
-          <div className="flex justify-between items-center px-6 py-4">
+          <div className="flex justify-between items-center px-4 py-2">
             <span className="text-sm font-mono text-[#666666]">Status</span>
-            <span className="text-sm font-light">Available</span>
+            <span className="text-sm font-mono text-[#666666] text-right">Available</span>
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t border-[#eaeaea]">
+        <div className="px-4 py-2 border-t border-[#eaeaea]">
           <button
             onClick={handleAddToCart}
             disabled={isLoading}

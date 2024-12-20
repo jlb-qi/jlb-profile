@@ -1,55 +1,8 @@
 import { useState, useEffect } from 'react';
 import { queryProducts, createCart, addToCart } from '../utils/shopifyClient';
-import { ProductCard } from '../components/ProductCard';
+import { ProductGrid } from '../components/ProductGrid';
 import { Cart } from '../components/Cart';
-
-interface ShopifyImage {
-  node: {
-    url: string;
-    altText?: string;
-  };
-}
-
-interface ShopifyProduct {
-  id: string;
-  title: string;
-  description: string;
-  priceRange: {
-    minVariantPrice: {
-      amount: string;
-      currencyCode: string;
-    };
-  };
-  images: {
-    edges: ShopifyImage[];
-  };
-  variants: {
-    edges: Array<{
-      node: {
-        id: string;
-      };
-    }>;
-  };
-}
-
-interface CartItem {
-  id: string;
-  quantity: number;
-  merchandise: {
-    id: string;
-    title: string;
-    priceV2: {
-      amount: string;
-      currencyCode: string;
-    };
-    product: {
-      title: string;
-      images: {
-        edges: ShopifyImage[];
-      };
-    };
-  };
-}
+import type { ShopifyProduct, CartItem } from '../types/shopify';
 
 export const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -115,18 +68,12 @@ export const Shop = () => {
   }
 
   return (
-    <div className="max-w-[800px] mx-auto">
-      <div>
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={() => handleAddToCart(product.variants.edges[0].node.id)}
-            cartId={cartId}
-            imageSize={160}
-          />
-        ))}
-      </div>
+    <div className="max-w-[800px] mx-auto px-4 sm:px-6 py-8">
+      <ProductGrid
+        products={products}
+        onAddToCart={handleAddToCart}
+        cartId={cartId}
+      />
 
       <Cart
         items={cartItems}
