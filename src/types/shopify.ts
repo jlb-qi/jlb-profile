@@ -5,6 +5,21 @@ export interface ShopifyImage {
   };
 }
 
+export interface ShopifyVariant {
+  node: {
+    id: string;
+    title: string;
+    selectedOptions: {
+      name: string;
+      value: string;
+    }[];
+    image?: {
+      url: string;
+      altText?: string;
+    };
+  };
+}
+
 export interface ShopifyProduct {
   id: string;
   title: string;
@@ -19,12 +34,12 @@ export interface ShopifyProduct {
     edges: ShopifyImage[];
   };
   variants: {
-    edges: Array<{
-      node: {
-        id: string;
-      };
-    }>;
+    edges: ShopifyVariant[];
   };
+  options: {
+    name: string;
+    values: string[];
+  }[];
 }
 
 export interface CartItem {

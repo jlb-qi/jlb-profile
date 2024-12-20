@@ -14,7 +14,7 @@ export const ProductGrid = ({ products, onAddToCart, cartId }: ProductGridProps)
         <div key={product.id} className="w-full">
           <ProductCard
             product={product}
-            onAddToCart={() => onAddToCart(product.variants.edges[0].node.id)}
+            onAddToCart={onAddToCart}
             cartId={cartId}
             imageSize={300}
           />

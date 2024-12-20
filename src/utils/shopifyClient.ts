@@ -45,7 +45,11 @@ export const QUERY_PRODUCTS = gql`
               currencyCode
             }
           }
-          images(first: 1) {
+          options {
+            name
+            values
+          }
+          images(first: 20) {
             edges {
               node {
                 url
@@ -53,10 +57,19 @@ export const QUERY_PRODUCTS = gql`
               }
             }
           }
-          variants(first: 1) {
+          variants(first: 100) {
             edges {
               node {
                 id
+                title
+                selectedOptions {
+                  name
+                  value
+                }
+                image {
+                  url
+                  altText
+                }
               }
             }
           }
@@ -134,6 +147,10 @@ interface ProductsResponse {
             currencyCode: string;
           };
         };
+        options: {
+          name: string;
+          values: string[];
+        }[];
         images: {
           edges: Array<{
             node: {
@@ -146,6 +163,15 @@ interface ProductsResponse {
           edges: Array<{
             node: {
               id: string;
+              title: string;
+              selectedOptions: {
+                name: string;
+                value: string;
+              }[];
+              image: {
+                url: string;
+                altText?: string;
+              };
             };
           }>;
         };
