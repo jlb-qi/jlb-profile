@@ -81,6 +81,25 @@ function App() {
                 <p><a href="https://goodreads.com/jlbqi" target="_blank" rel="noopener noreferrer">See more on Goodreads →</a></p>
               </section>
 
+              <section className="movies">
+                <h2>Top Movies</h2>
+                <p>Movies I could watch again and again and again and never get sick of</p>
+                <ul className="movie-list">
+                  <li>
+                    <div className="movie-title"><strong>Casablanca</strong></div>
+                    <div className="movie-year">(1942)</div>
+                  </li>
+                  <li>
+                    <div className="movie-title"><strong>The Matrix</strong></div>
+                    <div className="movie-year">(1999)</div>
+                  </li>
+                  <li>
+                    <div className="movie-title"><strong>The Shawshank Redemption</strong></div>
+                    <div className="movie-year">(1994)</div>
+                  </li>
+                </ul>
+              </section>
+
               <section className="collaboration">
                 <h2>Collaboration</h2>
                 <p>Got a wild idea? I'm into it. Let's build.</p>

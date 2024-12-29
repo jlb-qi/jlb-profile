@@ -161,6 +161,21 @@ p {
   color: #333;
 }
 
+.movie-list {
+  list-style: none;
+  padding: 0;
+}
+
+.movie-list li {
+  margin-bottom: 1.5rem;
+}
+
+.movie-year {
+  margin-left: 1.5rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
 /* Shop Styles */
 .container {
   width: 100%;
