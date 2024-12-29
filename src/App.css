@@ -137,6 +137,30 @@ p {
   opacity: 0.7;
 }
 
+.book-list {
+  list-style: none;
+  padding: 0;
+}
+
+.book-list li {
+  margin-bottom: 1.5rem;
+}
+
+.book-author,
+.book-description {
+  margin-left: 1.5rem;
+}
+
+.book-author {
+  margin-top: 0.25rem;
+  color: #666;
+}
+
+.book-description {
+  margin-top: 0.25rem;
+  color: #333;
+}
+
 /* Shop Styles */
 .container {
   width: 100%;

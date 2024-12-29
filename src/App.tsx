@@ -61,11 +61,24 @@ function App() {
 
               <section className="books">
                 <h2>Book Recommendations</h2>
-                <ul>
-                  <li>In Praise of Shadows by Jun'ichirō Tanizaki — On finding beauty in the subtle and understated</li>
-                  <li>Anti-Fragile by Nassim Nicholas Taleb — Why some things benefit from disorder</li>
-                  <li>The Courage to be Disliked by Ichiro Kishimi & Fumitake Koga — Exploring freedom through Adlerian psychology</li>
+                <ul className="book-list">
+                  <li>
+                    <div className="book-title"><strong>In Praise of Shadows</strong></div>
+                    <div className="book-author"><em>by Jun'ichirō Tanizaki</em></div>
+                    <div className="book-description">On finding beauty in the subtle and understated</div>
+                  </li>
+                  <li>
+                    <div className="book-title"><strong>Anti-Fragile</strong></div>
+                    <div className="book-author"><em>by Nassim Nicholas Taleb</em></div>
+                    <div className="book-description">Why some things benefit from disorder</div>
+                  </li>
+                  <li>
+                    <div className="book-title"><strong>The Courage to be Disliked</strong></div>
+                    <div className="book-author"><em>by Ichiro Kishimi & Fumitake Koga</em></div>
+                    <div className="book-description">Exploring freedom through Adlerian psychology</div>
+                  </li>
                 </ul>
+                <p><a href="https://goodreads.com/jlbqi" target="_blank" rel="noopener noreferrer">See more on Goodreads →</a></p>
               </section>
 
               <section className="collaboration">
