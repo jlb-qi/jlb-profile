@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { Shop } from './pages/Shop'
+import { Projects } from './pages/Projects'
+import { ProjectPage } from './pages/ProjectPage'
 import './App.css'
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
 
         <Routes>
           {isDevMode && <Route path="/shop" element={<Shop />} />}
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/" element={
             <div className="content-container">
               <div className="profile-pic-container">
@@ -50,6 +54,7 @@ function App() {
                   <li>Designed systems for outdoor activities and transport systems.</li>
                   <li>Prototyped experimental solutions for everyday problems.</li>
                 </ul>
+                <p><Link to="/projects" className="inline-block mt-4 text-blue-400 hover:text-blue-300">View all projects →</Link></p>
               </section>
 
               <section className="philosophy">
