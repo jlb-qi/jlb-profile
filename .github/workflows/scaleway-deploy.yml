@@ -28,25 +28,41 @@ jobs:
         echo "region = fr-par" >> ~/.aws/config
         echo "output = json" >> ~/.aws/config
         aws configure set s3.endpoint_url https://s3.fr-par.scw.cloud
-    - name: Deploy to Scaleway
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.SCALEWAY_ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.SCALEWAY_SECRET_KEY }}
+        - name: Verify AWS CLI Version
+        run: aws --version
+    - name: Configure AWS CLI for Scaleway
       run: |
-        aws s3 sync dist s3://jlbqi.com \
-          --delete \
-          --endpoint-url https://s3.fr-par.scw.cloud \
-          --region fr-par \
-          --acl public-read \
-          --cache-control "max-age=86400" \
-          --exclude "*.html" \
-          --exclude "*.json"
-
-        aws s3 sync dist s3://jlbqi.com \
-          --delete \
-          --endpoint-url https://s3.fr-par.scw.cloud \
-          --region fr-par \
-          --acl public-read \
-          --cache-control "no-cache, no-store, must-revalidate" \
-          --include "*.html" \
-          --include "*.json"
+        mkdir -p ~/.aws
+        # Create credentials file
+        cat > ~/.aws/credentials << EOF
+        [default]
+        aws_access_key_id = ${{ secrets.SCALEWAY_ACCESS_KEY }}
+        aws_secret_access_key = ${{ secrets.SCALEWAY_SECRET_KEY }}
+        EOF
+        
+        # Create config file
+        cat > ~/.aws/config << EOF
+        [default]
+        region = fr-par
+        EOF
+    - name: Configure Rclone for Scaleway
+      run: |
+        mkdir -p ~/.config/rclone
+        cat > ~/.config/rclone/rclone.conf << EOF
+        [scaleway]
+        type = s3
+        provider = Other
+        env_auth = false
+        access_key_id = ${{ secrets.SCALEWAY_ACCESS_KEY }}
+        secret_access_key = ${{ secrets.SCALEWAY_SECRET_KEY }}
+        region = fr-par
+        endpoint = https://s3.fr-par.scw.cloud
+        acl = public-read
+        EOF
+    - name: Deploy to Scaleway using Rclone
+      run: |
+        rclone sync dist scaleway:${{ env.DEPLOY_BUCKET }} \
+          --progress \
+          --exclude .DS_Store \
+          --exclude *.swp \
+          --s3-acl=public-read
