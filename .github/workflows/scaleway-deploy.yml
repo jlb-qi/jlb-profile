@@ -19,32 +19,6 @@ jobs:
       run: npm install
     - name: Build
       run: npm run build
-    - name: Configure AWS CLI for Scaleway
-      run: |
-        mkdir -p ~/.aws
-        echo "[default]" > ~/.aws/config
-        echo "aws_access_key_id = ${{ secrets.SCALEWAY_ACCESS_KEY }}" >> ~/.aws/config
-        echo "aws_secret_access_key = ${{ secrets.SCALEWAY_SECRET_KEY }}" >> ~/.aws/config
-        echo "region = fr-par" >> ~/.aws/config
-        echo "output = json" >> ~/.aws/config
-        aws configure set s3.endpoint_url https://s3.fr-par.scw.cloud
-        - name: Verify AWS CLI Version
-        run: aws --version
-    - name: Configure AWS CLI for Scaleway
-      run: |
-        mkdir -p ~/.aws
-        # Create credentials file
-        cat > ~/.aws/credentials << EOF
-        [default]
-        aws_access_key_id = ${{ secrets.SCALEWAY_ACCESS_KEY }}
-        aws_secret_access_key = ${{ secrets.SCALEWAY_SECRET_KEY }}
-        EOF
-        
-        # Create config file
-        cat > ~/.aws/config << EOF
-        [default]
-        region = fr-par
-        EOF
     - name: Configure Rclone for Scaleway
       run: |
         mkdir -p ~/.config/rclone
