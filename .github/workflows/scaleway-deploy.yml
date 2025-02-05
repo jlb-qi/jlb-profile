@@ -1,16 +1,16 @@
 name: Scaleway Deployment
 on:
   push:
-    branches: [ main ]
+    branches: [ main, beta ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, beta ]
 
 jobs:
   deploy-to-scaleway:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta') && github.event_name == 'push'
     env:
-      DEPLOY_BUCKET: ${{ secrets.SCALEWAY_BUCKET_NAME }}
+      DEPLOY_BUCKET: ${{ github.ref == 'refs/heads/main' && 'jlbqi.com' || 'beta.jlbqi.com' }}
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js
