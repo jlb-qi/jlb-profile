@@ -9,6 +9,8 @@ jobs:
   deploy-to-scaleway:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    env:
+      DEPLOY_BUCKET: ${{ secrets.SCALEWAY_BUCKET_NAME }}
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js
@@ -19,6 +21,14 @@ jobs:
       run: npm install
     - name: Build
       run: npm run build
+    - name: Install Rclone
+      run: |
+        curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+        unzip rclone-current-linux-amd64.zip
+        cd rclone-*-linux-amd64
+        sudo cp rclone /usr/local/bin/
+        sudo chmod +x /usr/local/bin/rclone
+        rclone version
     - name: Configure Rclone for Scaleway
       run: |
         mkdir -p ~/.config/rclone
