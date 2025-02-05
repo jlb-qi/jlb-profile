@@ -35,18 +35,22 @@ jobs:
         cat > ~/.config/rclone/rclone.conf << EOF
         [scaleway]
         type = s3
-        provider = Other
+        provider = Scaleway
         env_auth = false
         access_key_id = ${{ secrets.SCALEWAY_ACCESS_KEY }}
         secret_access_key = ${{ secrets.SCALEWAY_SECRET_KEY }}
         region = fr-par
-        endpoint = https://s3.fr-par.scw.cloud
+        endpoint = s3.fr-par.scw.cloud
+        location_constraint = fr-par
         acl = public-read
+        force_path_style = false
         EOF
     - name: Deploy to Scaleway using Rclone
       run: |
-        rclone sync dist scaleway:${{ env.DEPLOY_BUCKET }} \
+        rclone sync dist "scaleway:${{ env.DEPLOY_BUCKET }}" \
           --progress \
+          --s3-acl public-read \
           --exclude .DS_Store \
           --exclude *.swp \
+          --transfers 16
           --s3-acl=public-read
