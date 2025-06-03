@@ -40,7 +40,7 @@ export const Cart = ({ items, checkoutUrl, isOpen, onClose }: CartProps) => {
   };
 
   return (
-    <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-lg p-6 transform transition-transform">
+    <div className="fixed right-0 top-0 h-full w-96 bg-gray-900 shadow-lg p-6 transform transition-transform">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">
           {items.length} products - {total} kr
