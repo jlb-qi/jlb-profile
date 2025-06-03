@@ -11,6 +11,7 @@ jobs:
     if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/beta') && github.event_name == 'push'
     env:
       DEPLOY_BUCKET: ${{ github.ref == 'refs/heads/main' && 'jlbqi.com' || 'beta.jlbqi.com' }}
+      VITE_STORE_ACTIVE: ${{ secrets.VITE_STORE_ACTIVE }}
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js

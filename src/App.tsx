@@ -7,6 +7,7 @@ import './App.css'
 function App() {
   const appEnv = import.meta.env.VITE_APP_ENV || 'prod'
   const isDevMode = appEnv === 'dev'
+  const storeActive = import.meta.env.VITE_STORE_ACTIVE === 'true'
 
   return (
     <Router>
@@ -14,9 +15,10 @@ function App() {
         <header className="header">
           <div className="content-container">
             <div className="logo">JLb</div>
-            {isDevMode &&<nav className="main-nav">
+            {(isDevMode || storeActive) &&
+            <nav className="main-nav">
               <Link to="/" className="nav-link">Home</Link>
-               <Link to="/shop" className="nav-link">Shop</Link>
+              {storeActive && <Link to="/shop" className="nav-link">Shop</Link>}
             </nav>
             }
             <h1 className="tagline">
@@ -26,7 +28,7 @@ function App() {
         </header>
 
         <Routes>
-          {isDevMode && <Route path="/shop" element={<Shop />} />}
+          {storeActive && <Route path="/shop" element={<Shop />} />}
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/" element={
