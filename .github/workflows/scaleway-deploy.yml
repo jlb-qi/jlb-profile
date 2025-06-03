@@ -12,6 +12,8 @@ jobs:
     env:
       DEPLOY_BUCKET: ${{ github.ref == 'refs/heads/main' && 'jlbqi.com' || 'beta.jlbqi.com' }}
       VITE_STORE_ACTIVE: ${{ secrets.VITE_STORE_ACTIVE }}
+      VITE_STOREFRONT_ACCESS_TOKEN: ${{ secrets.VITE_STOREFRONT_ACCESS_TOKEN }}
+      VITE_STOREFRONT_API: ${{ secrets.VITE_STOREFRONT_API }}
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js
